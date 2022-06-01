@@ -12,12 +12,11 @@ export default function Navbar() {
 }
 
 function CustomeLink({ to, children, ...props }) {
-  useResolvedPath
-  const path = window.location.pathname
-  if (path === to)
-    return (
-      <li ClassName={path === to ? "active" : ""}>
-        <Link to={to} {...props}>{children}</Link>
-      </li>
-    )
+  const resolevedPath = useResolvedPath(path)
+  const isActive = useMatch({ path: resolevedPath.pathname, end: true })
+  return (
+    <li ClassName={isActive ? "active" : ""}>
+      <Link to={to} {...props}>{children}</Link>
+    </li>
+  )
 }
